@@ -604,94 +604,94 @@ function attachDOMEventsToEventBus(eventBus) {
     event.initCustomEvent('documentload', true, true, {});
     window.dispatchEvent(event);
   });
-  eventBus.on('pagerendered', function (e) {
+  eventBus.on('pagerendered', function (evt) {
     var event = document.createEvent('CustomEvent');
     event.initCustomEvent('pagerendered', true, true, {
-      pageNumber: e.pageNumber,
-      cssTransform: e.cssTransform
+      pageNumber: evt.pageNumber,
+      cssTransform: evt.cssTransform
     });
-    e.source.div.dispatchEvent(event);
+    evt.source.div.dispatchEvent(event);
   });
-  eventBus.on('textlayerrendered', function (e) {
+  eventBus.on('textlayerrendered', function (evt) {
     var event = document.createEvent('CustomEvent');
-    event.initCustomEvent('textlayerrendered', true, true, { pageNumber: e.pageNumber });
-    e.source.textLayerDiv.dispatchEvent(event);
+    event.initCustomEvent('textlayerrendered', true, true, { pageNumber: evt.pageNumber });
+    evt.source.textLayerDiv.dispatchEvent(event);
   });
-  eventBus.on('pagechange', function (e) {
+  eventBus.on('pagechange', function (evt) {
     var event = document.createEvent('UIEvents');
     event.initUIEvent('pagechange', true, true, window, 0);
-    event.pageNumber = e.pageNumber;
-    e.source.container.dispatchEvent(event);
+    event.pageNumber = evt.pageNumber;
+    evt.source.container.dispatchEvent(event);
   });
-  eventBus.on('pagesinit', function (e) {
+  eventBus.on('pagesinit', function (evt) {
     var event = document.createEvent('CustomEvent');
     event.initCustomEvent('pagesinit', true, true, null);
-    e.source.container.dispatchEvent(event);
+    evt.source.container.dispatchEvent(event);
   });
-  eventBus.on('pagesloaded', function (e) {
+  eventBus.on('pagesloaded', function (evt) {
     var event = document.createEvent('CustomEvent');
-    event.initCustomEvent('pagesloaded', true, true, { pagesCount: e.pagesCount });
-    e.source.container.dispatchEvent(event);
+    event.initCustomEvent('pagesloaded', true, true, { pagesCount: evt.pagesCount });
+    evt.source.container.dispatchEvent(event);
   });
-  eventBus.on('scalechange', function (e) {
+  eventBus.on('scalechange', function (evt) {
     var event = document.createEvent('UIEvents');
     event.initUIEvent('scalechange', true, true, window, 0);
-    event.scale = e.scale;
-    event.presetValue = e.presetValue;
-    e.source.container.dispatchEvent(event);
+    event.scale = evt.scale;
+    event.presetValue = evt.presetValue;
+    evt.source.container.dispatchEvent(event);
   });
-  eventBus.on('updateviewarea', function (e) {
+  eventBus.on('updateviewarea', function (evt) {
     var event = document.createEvent('UIEvents');
     event.initUIEvent('updateviewarea', true, true, window, 0);
-    event.location = e.location;
-    e.source.container.dispatchEvent(event);
+    event.location = evt.location;
+    evt.source.container.dispatchEvent(event);
   });
-  eventBus.on('find', function (e) {
-    if (e.source === window) {
+  eventBus.on('find', function (evt) {
+    if (evt.source === window) {
       return;
     }
     var event = document.createEvent('CustomEvent');
-    event.initCustomEvent('find' + e.type, true, true, {
-      query: e.query,
-      phraseSearch: e.phraseSearch,
-      caseSensitive: e.caseSensitive,
-      highlightAll: e.highlightAll,
-      findPrevious: e.findPrevious
+    event.initCustomEvent('find' + evt.type, true, true, {
+      query: evt.query,
+      phraseSearch: evt.phraseSearch,
+      caseSensitive: evt.caseSensitive,
+      highlightAll: evt.highlightAll,
+      findPrevious: evt.findPrevious
     });
     window.dispatchEvent(event);
   });
-  eventBus.on('attachmentsloaded', function (e) {
+  eventBus.on('attachmentsloaded', function (evt) {
     var event = document.createEvent('CustomEvent');
-    event.initCustomEvent('attachmentsloaded', true, true, { attachmentsCount: e.attachmentsCount });
-    e.source.container.dispatchEvent(event);
+    event.initCustomEvent('attachmentsloaded', true, true, { attachmentsCount: evt.attachmentsCount });
+    evt.source.container.dispatchEvent(event);
   });
-  eventBus.on('sidebarviewchanged', function (e) {
+  eventBus.on('sidebarviewchanged', function (evt) {
     var event = document.createEvent('CustomEvent');
-    event.initCustomEvent('sidebarviewchanged', true, true, { view: e.view });
-    e.source.outerContainer.dispatchEvent(event);
+    event.initCustomEvent('sidebarviewchanged', true, true, { view: evt.view });
+    evt.source.outerContainer.dispatchEvent(event);
   });
-  eventBus.on('pagemode', function (e) {
+  eventBus.on('pagemode', function (evt) {
     var event = document.createEvent('CustomEvent');
-    event.initCustomEvent('pagemode', true, true, { mode: e.mode });
-    e.source.pdfViewer.container.dispatchEvent(event);
+    event.initCustomEvent('pagemode', true, true, { mode: evt.mode });
+    evt.source.pdfViewer.container.dispatchEvent(event);
   });
-  eventBus.on('namedaction', function (e) {
+  eventBus.on('namedaction', function (evt) {
     var event = document.createEvent('CustomEvent');
-    event.initCustomEvent('namedaction', true, true, { action: e.action });
-    e.source.pdfViewer.container.dispatchEvent(event);
+    event.initCustomEvent('namedaction', true, true, { action: evt.action });
+    evt.source.pdfViewer.container.dispatchEvent(event);
   });
-  eventBus.on('presentationmodechanged', function (e) {
+  eventBus.on('presentationmodechanged', function (evt) {
     var event = document.createEvent('CustomEvent');
     event.initCustomEvent('presentationmodechanged', true, true, {
-      active: e.active,
-      switchInProgress: e.switchInProgress
+      active: evt.active,
+      switchInProgress: evt.switchInProgress
     });
     window.dispatchEvent(event);
   });
-  eventBus.on('outlineloaded', function (e) {
+  eventBus.on('outlineloaded', function (evt) {
     var event = document.createEvent('CustomEvent');
-    event.initCustomEvent('outlineloaded', true, true, { outlineCount: e.outlineCount });
-    e.source.container.dispatchEvent(event);
+    event.initCustomEvent('outlineloaded', true, true, { outlineCount: evt.outlineCount });
+    evt.source.container.dispatchEvent(event);
   });
 }
 var globalEventBus = null;
@@ -1259,6 +1259,7 @@ var PDFPageView = function () {
     var defaultViewport = options.defaultViewport;
     this.id = options.id;
     this.renderingId = 'page' + this.id;
+    this.pdfPage = null;
     this.pageLabel = null;
     this.rotation = 0;
     this.scale = options.scale || _ui_utils.DEFAULT_SCALE;
@@ -1308,6 +1309,7 @@ var PDFPageView = function () {
       this.reset();
       if (this.pdfPage) {
         this.pdfPage.cleanup();
+        this.pdfPage = null;
       }
     }
   }, {
@@ -1503,6 +1505,10 @@ var PDFPageView = function () {
       if (this.renderingState !== _pdf_rendering_queue.RenderingStates.INITIAL) {
         console.error('Must be in new state before drawing');
         this.reset();
+      }
+      if (!this.pdfPage) {
+        this.renderingState = _pdf_rendering_queue.RenderingStates.FINISHED;
+        return Promise.reject(new Error('Page is not loaded'));
       }
       this.renderingState = _pdf_rendering_queue.RenderingStates.RUNNING;
       var pdfPage = this.pdfPage;
@@ -2240,10 +2246,14 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.DownloadManager = undefined;
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _pdfjsLib = __w_pdfjs_require__(0);
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 ;
-function download(blobUrl, filename) {
+function _download(blobUrl, filename) {
   var a = document.createElement('a');
   if (a.click) {
     a.href = blobUrl;
@@ -2262,36 +2272,50 @@ function download(blobUrl, filename) {
     window.open(blobUrl, '_parent');
   }
 }
-function DownloadManager() {}
-DownloadManager.prototype = {
-  downloadUrl: function DownloadManager_downloadUrl(url, filename) {
-    if (!(0, _pdfjsLib.createValidAbsoluteUrl)(url, 'http://example.com')) {
-      return;
-    }
-    download(url + '#pdfjs.action=download', filename);
-  },
-  downloadData: function DownloadManager_downloadData(data, filename, contentType) {
-    if (navigator.msSaveBlob) {
-      return navigator.msSaveBlob(new Blob([data], { type: contentType }), filename);
-    }
-    var blobUrl = (0, _pdfjsLib.createObjectURL)(data, contentType, _pdfjsLib.PDFJS.disableCreateObjectURL);
-    download(blobUrl, filename);
-  },
-  download: function DownloadManager_download(blob, url, filename) {
-    if (navigator.msSaveBlob) {
-      if (!navigator.msSaveBlob(blob, filename)) {
-        this.downloadUrl(url, filename);
-      }
-      return;
-    }
-    if (_pdfjsLib.PDFJS.disableCreateObjectURL) {
-      this.downloadUrl(url, filename);
-      return;
-    }
-    var blobUrl = URL.createObjectURL(blob);
-    download(blobUrl, filename);
+
+var DownloadManager = function () {
+  function DownloadManager() {
+    _classCallCheck(this, DownloadManager);
   }
-};
+
+  _createClass(DownloadManager, [{
+    key: 'downloadUrl',
+    value: function downloadUrl(url, filename) {
+      if (!(0, _pdfjsLib.createValidAbsoluteUrl)(url, 'http://example.com')) {
+        return;
+      }
+      _download(url + '#pdfjs.action=download', filename);
+    }
+  }, {
+    key: 'downloadData',
+    value: function downloadData(data, filename, contentType) {
+      if (navigator.msSaveBlob) {
+        return navigator.msSaveBlob(new Blob([data], { type: contentType }), filename);
+      }
+      var blobUrl = (0, _pdfjsLib.createObjectURL)(data, contentType, _pdfjsLib.PDFJS.disableCreateObjectURL);
+      _download(blobUrl, filename);
+    }
+  }, {
+    key: 'download',
+    value: function download(blob, url, filename) {
+      if (navigator.msSaveBlob) {
+        if (!navigator.msSaveBlob(blob, filename)) {
+          this.downloadUrl(url, filename);
+        }
+        return;
+      }
+      if (_pdfjsLib.PDFJS.disableCreateObjectURL) {
+        this.downloadUrl(url, filename);
+        return;
+      }
+      var blobUrl = URL.createObjectURL(blob);
+      _download(blobUrl, filename);
+    }
+  }]);
+
+  return DownloadManager;
+}();
+
 exports.DownloadManager = DownloadManager;
 
 /***/ }),
@@ -2580,6 +2604,10 @@ var PDFFindController = function () {
               strBuf.push(textItems[j].str);
             }
             _this2.pageContents[i] = strBuf.join('');
+            extractTextCapability.resolve(i);
+          }, function (reason) {
+            console.error('Unable to get page ' + (i + 1) + ' text content', reason);
+            _this2.pageContents[i] = '';
             extractTextCapability.resolve(i);
           });
         });
@@ -3256,7 +3284,7 @@ var PDFViewer = function () {
       };
       var firstPagePromise = pdfDocument.getPage(1);
       this.firstPagePromise = firstPagePromise;
-      return firstPagePromise.then(function (pdfPage) {
+      firstPagePromise.then(function (pdfPage) {
         var scale = _this.currentScale;
         var viewport = pdfPage.getViewport(scale * _ui_utils.CSS_UNITS);
         for (var pageNum = 1; pageNum <= pagesCount; ++pageNum) {
@@ -3298,6 +3326,11 @@ var PDFViewer = function () {
               if (--getPagesLeft === 0) {
                 pagesCapability.resolve();
               }
+            }, function (reason) {
+              console.error('Unable to get page ' + _pageNum + ' to initialize viewer', reason);
+              if (--getPagesLeft === 0) {
+                pagesCapability.resolve();
+              }
             });
           };
 
@@ -3312,6 +3345,8 @@ var PDFViewer = function () {
         if (_this.findController) {
           _this.findController.resolveFirstPage();
         }
+      }).catch(function (reason) {
+        console.error('Unable to initialize viewer', reason);
       });
     }
   }, {
@@ -3682,6 +3717,9 @@ var PDFViewer = function () {
         }
         _this2._pagesRequests[pageNumber] = null;
         return pdfPage;
+      }).catch(function (reason) {
+        console.error('Unable to get page for page view', reason);
+        _this2._pagesRequests[pageNumber] = null;
       });
       this._pagesRequests[pageNumber] = promise;
       return promise;
