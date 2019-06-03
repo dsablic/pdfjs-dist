@@ -28309,7 +28309,10 @@ function () {
       hasAppearance: !!this.appearance,
       id: params.id,
       rect: this.rectangle,
-      subtype: params.subtype
+      subtype: params.subtype,
+      quadPoints: dict.getArray('QuadPoints'),
+      modified: dict.get('M'),
+      inkList: dict.getArray('InkList')
     };
   }
 
